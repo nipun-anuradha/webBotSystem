@@ -18,10 +18,6 @@ yarn.lock
 # MacOS files
 .DS_Store
 
-# Environment files
-.env
-.env.*
-
 # IDE and editor files
 .idea/
 .vscode/
