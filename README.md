@@ -36,5 +36,12 @@ Instead of customers calling to ask:
 
 ---
 
-## 📁 Project Structure
+## Run project
 
+cd backend
+npm install
+npm start OR node src/index.js
+
+cd frontend
+npm install --force
+npm start OR npm run dev
