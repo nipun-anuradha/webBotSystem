@@ -36,7 +36,14 @@ Instead of customers calling to ask:
 
 ---
 
-## Run project
+## 🚀 Run Project
+
+### 🐇 Prerequisite: Install RabbitMQ
+
+Make sure **RabbitMQ** is installed and running.
+
+- **Download & install**: [https://www.rabbitmq.com/download.html](https://www.rabbitmq.com/download.html)
+- Start the RabbitMQ server
 
 Backend
 - cd backend
