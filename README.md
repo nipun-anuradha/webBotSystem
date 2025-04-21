@@ -38,10 +38,12 @@ Instead of customers calling to ask:
 
 ## Run project
 
-cd backend
-npm install
-npm start OR node src/index.js
+Backend
+- cd backend
+- npm install
+- npm start OR node src/index.js
 
-cd frontend
-npm install --force
-npm start OR npm run dev
+Frontend
+- cd frontend
+- npm install --force
+- npm start OR npm run dev
