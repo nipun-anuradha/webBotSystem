@@ -1,0 +1,42 @@
+image: docker:stable
+
+options:
+  docker: true
+
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Build and Push Docker Image
+          size: 2x  # Increase step size for additional resources (4GB memory)
+          caches:
+            - docker
+          script:
+            # Install necessary packages
+            - apk add --no-cache python3 py3-pip jq
+            - pip install --upgrade awscli
+            
+            # Set up AWS credentials
+            - mkdir -p ~/.aws
+            - echo "[default]" > ~/.aws/config
+            - echo "region = $AWS_REGION" >> ~/.aws/config
+            - echo "[default]" > ~/.aws/credentials
+            - echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
+            - echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+            
+            # Login to AWS ECR
+            - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_URI
+            
+            # Build Docker image
+            - docker build -t whatsapp-chatbot-webapp-backend ./
+            
+            # Tag Docker image
+            - docker tag whatsapp-chatbot-webapp-backend:latest $ECR_URI:latest
+            
+            # Push Docker image to ECR
+            - docker push $ECR_URI:latest
+
+definitions:
+  services:
+    docker:
+      memory: 4096  # Allocate 4GB to Docker
